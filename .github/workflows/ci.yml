@@ -8,18 +8,22 @@ on:
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: npm
           cache-dependency-path: |
             client/package-lock.json
             server/package-lock.json
+
       - name: Install server
         run: npm ci
         working-directory: server
+
       - name: Test server
         run: npm test
         working-directory: server
@@ -29,9 +33,11 @@ jobs:
           CLIENT_URL: http://localhost:5173
           JWT_ACCESS_SECRET: ci-access-secret-long-enough-for-validation
           JWT_REFRESH_SECRET: ci-refresh-secret-long-enough-for-validation
+
       - name: Install client
-        run: npm ci
+        run: npm install --include=optional
         working-directory: client
+
       - name: Build client
         run: npm run build
         working-directory: client
