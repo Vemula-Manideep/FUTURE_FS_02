@@ -1,0 +1,17 @@
+{
+  "name": "client-lead-management-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-grade MERN SaaS mini CRM for client lead management.",
+  "scripts": {
+    "dev:client": "npm --prefix client run dev",
+    "dev:server": "npm --prefix server run dev",
+    "build": "npm --prefix client run build",
+    "test": "npm --prefix server test && npm --prefix client test",
+    "seed": "npm --prefix server run seed"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ]
+}
